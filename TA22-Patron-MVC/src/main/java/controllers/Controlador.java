@@ -17,23 +17,14 @@ public class Controlador implements ActionListener {
 	public Controlador(Modelo modelo, Vista vista) {
 			this.modelo=modelo;
 			this.vista=vista;
-			this.vista.boton_create.addActionListener(this);
+			/*this.vista.boton_create.addActionListener(this);
 			this.vista.boton_delete.addActionListener(this);
 			this.vista.boton_read.addActionListener(this);
 			this.vista.boton_update.addActionListener(this);
 			this.vista.boton_borrar.addActionListener(this);
-			this.vista.boton_salir.addActionListener(this);
+			this.vista.boton_salir.addActionListener(this);*/
 		}
 
-	
-	public void iniciarVista() {
-		
-		vista.setTitle("Registro Clientes");
-		vista.pack();
-		vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		vista.setLocationRelativeTo(null);
-		vista.setVisible(true);
-	}
 	
 	public void actionPerformed(ActionEvent evento) {
 			if(vista.boton_create == evento.getSource()) {
