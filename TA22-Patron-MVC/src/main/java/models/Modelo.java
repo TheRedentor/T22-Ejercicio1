@@ -13,9 +13,9 @@ public class Modelo {
 	private int dni;
 	private String fecha;
 	private Conexion conexion = new Conexion();
-	
+
+
 	public Modelo() {
-		
 	}
 	public int getId() {
 		return id;

@@ -24,9 +24,16 @@ public class Controlador implements ActionListener {
 			this.vista.boton_borrar.addActionListener(this);
 			this.vista.boton_salir.addActionListener(this);
 		}
+
 	
-	
-	
+	public void iniciarVista() {
+		
+		vista.setTitle("Registro Clientes");
+		vista.pack();
+		vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		vista.setLocationRelativeTo(null);
+		vista.setVisible(true);
+	}
 	
 	public void actionPerformed(ActionEvent evento) {
 			if(vista.boton_create == evento.getSource()) {
