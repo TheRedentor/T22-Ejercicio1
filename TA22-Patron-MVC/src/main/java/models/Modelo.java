@@ -12,7 +12,7 @@ public class Modelo {
 	private String direccion;
 	private int dni;
 	private String fecha;
-	private Conexion conexion;
+	private Conexion conexion = new Conexion();
 	
 	public Modelo() {
 		

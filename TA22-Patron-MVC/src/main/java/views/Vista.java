@@ -9,9 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.JLayeredPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JDesktopPane;
 
 public class Vista extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	public JPanel contentPane,vista_create,vista_update, vista_read, vista_delete;
 	public JTextField textField;
 	public JTextField textField_1;
@@ -22,6 +30,8 @@ public class Vista extends JFrame {
 
 	public Vista() {
 		
+		setTitle("Registro clientes");
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 643, 568);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -29,56 +39,64 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
-		
+	
 		// ELEMENTOS VISTA CREATE
 		
 		JPanel vista_create = new JPanel();
 		vista_create.setLayout(null);
 		vista_create.setBorder(new EmptyBorder(5, 5, 5, 5));
-		vista_create.setBounds(272, 11, 345, 507);
+		vista_create.setBounds(272, 61, 345, 457);
 		contentPane.add(vista_create);
 		
 		textField = new JTextField();
-		textField.setBounds(37, 55, 86, 20);
+		textField.setBounds(77, 83, 86, 20);
 		vista_create.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(37, 30, 46, 14);
+		lblNewLabel.setBounds(77, 58, 46, 14);
 		vista_create.add(lblNewLabel);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(37, 111, 86, 20);
+		textField_1.setBounds(77, 151, 86, 20);
 		vista_create.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Apellido");
-		lblNewLabel_1.setBounds(37, 86, 46, 14);
+		lblNewLabel_1.setBounds(77, 126, 46, 14);
 		vista_create.add(lblNewLabel_1);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(37, 167, 86, 20);
+		textField_2.setBounds(77, 218, 86, 20);
 		vista_create.add(textField_2);
 		textField_2.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("DNI");
-		lblNewLabel_2.setBounds(37, 142, 46, 14);
+		lblNewLabel_2.setBounds(77, 193, 46, 14);
 		vista_create.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Fecha");
-		lblNewLabel_3.setBounds(37, 198, 46, 14);
+		lblNewLabel_3.setBounds(77, 260, 46, 14);
 		vista_create.add(lblNewLabel_3);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(37, 223, 86, 20);
+		textField_3.setBounds(77, 285, 86, 20);
 		vista_create.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JButton boton_guardar = new JButton("Guardar");
-		boton_guardar.setBounds(91, 299, 147, 73);
+		boton_guardar.setBounds(94, 342, 124, 46);
 		vista_create.add(boton_guardar);
+		
+		JLabel lblNewLabel_6 = new JLabel("Nuevo usuario");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_6.setBounds(141, 25, 91, 14);
+		vista_create.add(lblNewLabel_6);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 11, 40, 406);
+		vista_create.add(separator);
+		separator.setOrientation(SwingConstants.VERTICAL);
 		
 		
 		
@@ -87,9 +105,10 @@ public class Vista extends JFrame {
 		//ELEMENTOS VISTA UPDATE
 		
 		JPanel vista_update = new JPanel();
+		//vista_update.setVisible(false);
 		vista_update.setLayout(null);
 		vista_update.setBorder(new EmptyBorder(5, 5, 5, 5));
-		vista_update.setBounds(272, 11, 345, 507);
+		vista_update.setBounds(272, 61, 345, 457);
 		contentPane.add(vista_update);
 		
 		textField = new JTextField();
@@ -149,9 +168,10 @@ public class Vista extends JFrame {
 		/// ELEMENTOS VISTA_READ
 		
 		JPanel vista_read = new JPanel();
+		//vista_read.setVisible(false);
 		vista_read.setLayout(null);
 		vista_read.setBorder(new EmptyBorder(5, 5, 5, 5));
-		vista_read.setBounds(272, 11, 345, 507);
+		vista_read.setBounds(272, 61, 345, 457);
 		contentPane.add(vista_read);
 		
 		JTextArea textArea = new JTextArea();
@@ -170,9 +190,10 @@ public class Vista extends JFrame {
 		
 		
 		JPanel vista_delete = new JPanel();
+		//vista_delete.setVisible(false);
 		vista_delete.setLayout(null);
 		vista_delete.setBorder(new EmptyBorder(5, 5, 5, 5));
-		vista_delete.setBounds(272, 11, 345, 507);
+		vista_delete.setBounds(272, 61, 345, 457);
 		contentPane.add(vista_delete);
 		
 		textField_4 = new JTextField();
@@ -191,20 +212,36 @@ public class Vista extends JFrame {
 		// BOTONES PANEL GENERAL
 		
 		
-		JButton boton_update = new JButton("Update");
-		boton_update.setBounds(50, 361, 89, 23);
+		JButton boton_update = new JButton("Actualizar usuario");
+		boton_update.setBounds(71, 287, 127, 40);
 		contentPane.add(boton_update);
 		
-		JButton boton_read = new JButton("Read");
-		boton_read.setBounds(50, 281, 89, 23);
+		JButton boton_read = new JButton("Mostrar registro");
+		boton_read.setBounds(71, 139, 127, 43);
 		contentPane.add(boton_read);
 		
-		JButton boton_create = new JButton("Create");
-		boton_create.setBounds(50, 212, 89, 23);
+		JButton boton_create = new JButton("Crear usuario");
+		boton_create.setBounds(71, 217, 127, 40);
 		contentPane.add(boton_create);
 		
-		JButton boton_delete = new JButton("Delete");
-		boton_delete.setBounds(50, 457, 89, 23);
+		JButton boton_delete = new JButton("Eliminar usuario");
+		boton_delete.setBounds(71, 359, 127, 40);
 		contentPane.add(boton_delete);
+		
+		JLabel lblNewLabel_4 = new JLabel("Opciones: ");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_4.setBounds(52, 87, 78, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("REGISTRO DE CLIENTES");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_5.setBounds(223, 11, 158, 14);
+		contentPane.add(lblNewLabel_5);
+		
+		
 	}
+
+	
+	
+	
 }
