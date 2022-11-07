@@ -16,8 +16,10 @@ public class App
     	Modelo modelo = new Modelo();
     	modelo.createDB();
     	Vista vista = new Vista();
-    	Controlador aux = new Controlador(modelo,vista);
+    	vista.setVisible(true);
     	
-    	aux.iniciarVista();
+    	//Controlador aux = new Controlador(modelo,vista);
+    	
+    	//aux.iniciarVista();
     }
 }

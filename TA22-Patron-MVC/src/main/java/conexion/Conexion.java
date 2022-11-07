@@ -39,7 +39,11 @@ public class Conexion {
 		
 		
 	public void create_connection() throws FileNotFoundException {
+		
+		System.out.println("Antes de read data");
         String[] data=readData();
+        System.out.println("Despues de read data");
+        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect=DriverManager.getConnection(data[0],data[1],data[2]);
