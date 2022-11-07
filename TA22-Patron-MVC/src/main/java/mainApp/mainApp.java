@@ -13,9 +13,10 @@ public class mainApp {
         	modelo.createDB();
         	
         	Vista vista = new Vista();
-
+        	vista.setVisible(true);
+        	
     		Controlador controlador = new Controlador(modelo, vista);
-    		vista.setVisible(true);
+    		
    
     }
 }

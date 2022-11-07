@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import com.sun.istack.internal.logging.Logger;
@@ -102,7 +103,8 @@ public class Conexion {
 	            Statement stdb = connect.createStatement();
 	            stdb.executeUpdate(Queryd);
 
-	            String Query = "UPDATE "+table_name+" SET "+ modif_columna +" = "+campo_cambiado+" WHERE "+condicion;
+	            String Query = "UPDATE "+table_name+" SET "+ modif_columna +" = '"+campo_cambiado+"' WHERE id = "+condicion;
+	            System.out.println(Query);
 	            Statement st = connect.createStatement();
 	            st.executeUpdate(Query);
 	            JOptionPane.showMessageDialog(null, "Registro modificado con éxito.");
@@ -118,7 +120,7 @@ public class Conexion {
 		            Statement stdb = connect.createStatement();
 		            stdb.executeUpdate(Queryd);
 
-		            String Query = " DELETE FROM "+table_name + " WHERE "+primaryKey+" = "+ID+"";
+		            String Query = "DELETE FROM "+table_name+" WHERE "+primaryKey+" = "+ID;
 		            Statement st = connect.createStatement();
 		            st.executeUpdate(Query);
 		            JOptionPane.showMessageDialog(null, "Registro borrado con éxito.");
@@ -128,27 +130,34 @@ public class Conexion {
 		        }
 		}
 		
-		public void readData(String db, String table_name) throws SQLException {
+		public ArrayList<String> readData(String db, String table_name) throws SQLException {
+			
+			ArrayList<String> text = new ArrayList<String>();
+			
 			try {
 	            String Queryd = "USE "+db+";";
 	            Statement stdb = connect.createStatement();
 	            stdb.executeUpdate(Queryd);
-
+	            
 	            String Query = "SELECT * FROM " + table_name;
 	            Statement st = connect.createStatement();
 	            java.sql.ResultSet resultSet;
 	            resultSet = st.executeQuery(Query);
-	            System.out.println("------------------");
-	            System.out.println("TABLA: "+table_name);
 	            while (resultSet.next()) {
-	                System.out.println("Codigo: "+ resultSet.getString("codigo")+" "
-	                        + "Nombre: "+ resultSet.getString("nombre"));
+	                text.add("ID: "+ resultSet.getString("id")+" "
+	                		+ "Nombre: "+ resultSet.getString("nombre")+" "
+	                		+ "Apellido: "+ resultSet.getString("apellido")+" "
+	                		+ "Dirección: "+ resultSet.getString("direccion")+" "
+	                		+ "DNI: "+ resultSet.getString("dni")+" "
+	                        + "Fecha: "+ resultSet.getString("fecha"));
 	            }
 
 	        } catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
 	            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos.");
 	        }
+			
+			return text;
 	    }
 		
 		

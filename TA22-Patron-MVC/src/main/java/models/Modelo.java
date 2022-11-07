@@ -1,6 +1,7 @@
 package models;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import conexion.Conexion;
 
@@ -57,17 +58,18 @@ public class Modelo {
 	
 	public void create(String nombre, String apellido, String direccion, int dni, String fecha) throws FileNotFoundException, SQLException {
 		conexion.create_connection();
-		conexion.insertData("T22_1","INSERT INTO Clientes (nombre, apellido, direccion, dni, fecha) VALUE("+nombre+", "+apellido+", "+direccion+", "+dni+", "+fecha+")");
+		conexion.insertData("T22_1","INSERT INTO Clientes (nombre, apellido, direccion, dni, fecha) VALUES('"+nombre+"', '"+apellido+"', '"+direccion+"', '"+dni+"', '"+fecha+"')");
 		conexion.closeConnection();
 	}
 	
-	public void read(int id, String nombre, String apellido, String direccion, int dni, String fecha) throws SQLException, FileNotFoundException {
+	public ArrayList<String> read() throws SQLException, FileNotFoundException {
 		conexion.create_connection();
-		conexion.readData("T22_1","Clientes");
+		ArrayList<String> text = conexion.readData("T22_1","Clientes");
 		conexion.closeConnection();
+		return text;
 	}
 	
-	public void update(String campo, String condicion, String campo_cambiado) throws FileNotFoundException, SQLException {
+	public void update(String campo, String campo_cambiado, String condicion) throws FileNotFoundException, SQLException {
 		conexion.create_connection();
 		conexion.updateData("T22_1","Clientes",campo,campo_cambiado,condicion);
 		conexion.closeConnection();
