@@ -1,13 +1,23 @@
 package mainApp;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
+import controllers.Controlador;
+import models.Modelo;
+import views.Vista;
 /**
  * Hello world!
  *
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws FileNotFoundException, SQLException
     {
-        System.out.println( "Hello World!" );
+    	Modelo modelo = new Modelo();
+    	modelo.createDB();
+    	Vista vista = new Vista();
+    	Controlador aux = new Controlador(modelo,vista);
+    	
+    	aux.iniciarVista();
     }
 }

@@ -70,12 +70,13 @@ public class Conexion {
 				//MySQLConnection();
 				JOptionPane.showMessageDialog(null," Created database " + name + "successfully ");
 			} catch (SQLException ex) {
-				System.out.println("We can't create DB");
 			}
 		}
 		
+		
+		
 		public void createTable(String db, String query) throws SQLException {
-			
+		try {
 			String Querydb = "USE "+db+";";
 			Statement stdb= connect.createStatement();
 			stdb.executeUpdate(Querydb);
@@ -83,6 +84,9 @@ public class Conexion {
 			Statement st = connect.createStatement();
 			st.executeUpdate(query);
 			System.out.println("Table created");
+			
+		}catch (SQLException sqlException) {
+		}
 			
 		}
 		
@@ -97,27 +101,61 @@ public class Conexion {
 			System.out.println("Inserted data complete!");
 		}
 		
-		public void updateData(String db, String query) throws SQLException {
-			String Querydb= "UPDATE "+db+";";
-			Statement stdb = connect.createStatement();
-			stdb.executeUpdate(Querydb);
-			
-			Statement st = connect.createStatement();
-			st.executeUpdate(query);
-			
-			System.out.println("Inserted data complete!");
+		public void updateData(String db, String table_name, String modif_columna, String campo_cambiado, String condicion) throws SQLException {
+		    try {
+	            String Queryd = "USE "+db+";";
+	            Statement stdb = connect.createStatement();
+	            stdb.executeUpdate(Queryd);
+
+	            String Query = "UPDATE "+table_name+" SET "+ modif_columna +" = "+campo_cambiado+" WHERE "+condicion;
+	            Statement st = connect.createStatement();
+	            st.executeUpdate(Query);
+	            JOptionPane.showMessageDialog(null, "Registro modificado con éxito.");
+	        } catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	            JOptionPane.showMessageDialog(null, "Error al modificar el registro especificado.");
+	        }
 		}
 		
-		public void deleteData(String db, String query) throws SQLException {
-			String Querydb= "DELETE "+db+";";
-			Statement stdb = connect.createStatement();
-			stdb.executeUpdate(Querydb);
-			
-			Statement st = connect.createStatement();
-			st.executeUpdate(query);
-			
-			System.out.println("Inserted data complete!");
+		public void deleteData(String db, String table_name, String primaryKey, int ID) throws SQLException {
+			 try {
+		            String Queryd = "USE "+db+";";
+		            Statement stdb = connect.createStatement();
+		            stdb.executeUpdate(Queryd);
+
+		            String Query = " DELETE FROM "+table_name + " WHERE "+primaryKey+" = "+ID+"";
+		            Statement st = connect.createStatement();
+		            st.executeUpdate(Query);
+		            JOptionPane.showMessageDialog(null, "Registro borrado con éxito.");
+		        } catch (SQLException ex) {
+		            System.out.println(ex.getMessage());
+		            JOptionPane.showMessageDialog(null, "Error al borrar el registro especificado.");
+		        }
 		}
+		
+		public void readData(String db, String table_name) throws SQLException {
+			try {
+	            String Queryd = "USE "+db+";";
+	            Statement stdb = connect.createStatement();
+	            stdb.executeUpdate(Queryd);
+
+	            String Query = "SELECT * FROM " + table_name;
+	            Statement st = connect.createStatement();
+	            java.sql.ResultSet resultSet;
+	            resultSet = st.executeQuery(Query);
+	            System.out.println("------------------");
+	            System.out.println("TABLA: "+table_name);
+	            while (resultSet.next()) {
+	                System.out.println("Codigo: "+ resultSet.getString("codigo")+" "
+	                        + "Nombre: "+ resultSet.getString("nombre"));
+	            }
+
+	        } catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos.");
+	        }
+	    }
+		
 		
 		
 	}

@@ -1,15 +1,22 @@
 package models;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
+
+import conexion.Conexion;
 
 public class Modelo {
+	
 	private int id;
 	private String nombre;
 	private String apellido;
 	private String direccion;
 	private int dni;
 	private String fecha;
+	private Conexion conexion;
 	
-	
-	
+	public Modelo() {
+		
+	}
 	public int getId() {
 		return id;
 	}
@@ -47,20 +54,38 @@ public class Modelo {
 		this.fecha = fecha;
 	}
 	
-	public void create(int id, String nombre, String apellido, String direccion, int dni, String fecha) {
-		
+	
+	public void create(String nombre, String apellido, String direccion, int dni, String fecha) throws FileNotFoundException, SQLException {
+		conexion.create_connection();
+		conexion.insertData("T22_1","INSERT INTO Clientes (nombre, apellido, direccion, dni, fecha) VALUE("+nombre+", "+apellido+", "+direccion+", "+dni+", "+fecha+")");
+		conexion.closeConnection();
 	}
 	
-	public void read(int id, String nombre, String apellido, String direccion, int dni, String fecha) {
-		
+	public void read(int id, String nombre, String apellido, String direccion, int dni, String fecha) throws SQLException, FileNotFoundException {
+		conexion.create_connection();
+		conexion.readData("T22_1","Clientes");
+		conexion.closeConnection();
 	}
 	
-	public void update(int id, String nombre, String apellido, String direccion, int dni, String fecha) {
-		
+	public void update(String campo, String condicion, String campo_cambiado) throws FileNotFoundException, SQLException {
+		conexion.create_connection();
+		conexion.updateData("T22_1","Clientes",campo,campo_cambiado,condicion);
+		conexion.closeConnection();
 	}
 	
-	public void delete(int id, String nombre, String apellido, String direccion, int dni, String fecha) {
+	public void delete(int id, String primarykey) throws FileNotFoundException, SQLException {
+		conexion.create_connection();
+		conexion.deleteData("T22_1","Clientes", primarykey, id);
+		conexion.closeConnection();
+	}
+	
+	public void createDB() throws FileNotFoundException, SQLException {
 		
+		conexion.create_connection();
+		conexion.createDB("T22_1");
+		conexion.createTable("T22_1", "CREATE TABLE Clientes (id INT AUTO_INCREMENT, nombre CHAR(250), apellido CHAR(250), direccion CHAR(250), dni INT, fecha DATE, PRIMARY KEY (id))");
+		conexion.closeConnection();
+
 	}
 
 }
