@@ -87,14 +87,20 @@ public class Conexion {
 		}
 		
 		public void insertData(String db, String query) throws SQLException {
-			String Querydb= "USE "+db+";";
-			Statement stdb = connect.createStatement();
-			stdb.executeUpdate(Querydb);
+			try {
+				String Querydb= "USE "+db+";";
+				Statement stdb = connect.createStatement();
+				stdb.executeUpdate(Querydb);
+				
+				Statement st = connect.createStatement();
+				st.executeUpdate(query);
+				
+				JOptionPane.showMessageDialog(null, "Usuario creado correctamente");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Error al crear el usuario.");
+
+			}
 			
-			Statement st = connect.createStatement();
-			st.executeUpdate(query);
-			
-			System.out.println("Inserted data complete!");
 		}
 		
 		public void updateData(String db, String table_name, String modif_columna, String campo_cambiado, String condicion) throws SQLException {
@@ -107,10 +113,10 @@ public class Conexion {
 	            System.out.println(Query);
 	            Statement st = connect.createStatement();
 	            st.executeUpdate(Query);
-	            JOptionPane.showMessageDialog(null, "Registro modificado con éxito.");
+	            JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.");
 	        } catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
-	            JOptionPane.showMessageDialog(null, "Error al modificar el registro especificado.");
+	            JOptionPane.showMessageDialog(null, "Error al modificar el usuario especificado.");
 	        }
 		}
 		
@@ -123,10 +129,10 @@ public class Conexion {
 		            String Query = "DELETE FROM "+table_name+" WHERE "+primaryKey+" = "+ID;
 		            Statement st = connect.createStatement();
 		            st.executeUpdate(Query);
-		            JOptionPane.showMessageDialog(null, "Registro borrado con éxito.");
+		            JOptionPane.showMessageDialog(null, "Usuario borrado con éxito.");
 		        } catch (SQLException ex) {
 		            System.out.println(ex.getMessage());
-		            JOptionPane.showMessageDialog(null, "Error al borrar el registro especificado.");
+		            JOptionPane.showMessageDialog(null, "Error al borrar el usuario especificado, compruebe su ID.");
 		        }
 		}
 		

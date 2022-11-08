@@ -26,7 +26,6 @@ public class Controlador implements ActionListener {
 			this.vista.boton_read.addActionListener(this);
 			this.vista.boton_update.addActionListener(this);
 			this.vista.boton_borrar.addActionListener(this);
-			this.vista.boton_salir.addActionListener(this);
 			this.vista.boton_guardar.addActionListener(this);
 			this.vista.boton_guardar1.addActionListener(this);
 		}
@@ -37,6 +36,12 @@ public class Controlador implements ActionListener {
 			try {
 				vista.textArea.setText(null);
 				
+				vista.createNombreField.setText("");
+				vista.createApellidoField.setText("");
+				vista.createDireccionField.setText("");
+				vista.createDniField.setText("");
+				vista.createFechaField.setText("");
+
 				vista.vista_create.setVisible(true);
 				vista.vista_delete.setVisible(false);
 				vista.vista_update.setVisible(false);
@@ -64,12 +69,18 @@ public class Controlador implements ActionListener {
 			try {
 				vista.textArea.setText(null);
 				
+				vista.textArea.setText(null);
+				vista.editNombreField.setText("");
+				vista.editApellidoField.setText("");
+				vista.editDireccionField.setText("");
+				vista.editDniField.setText("");
+				vista.editFechaField.setText("");
+				
 				vista.vista_create.setVisible(false);
 				vista.vista_delete.setVisible(false);
 				vista.vista_update.setVisible(true);
 				vista.vista_read.setVisible(false);
 			} catch (Exception e) {
-				
 			}
 		}
 		
@@ -85,11 +96,10 @@ public class Controlador implements ActionListener {
 				for (int i = 0; i < text.size(); i++) {
 					vista.textArea.append(text.get(i)+"\n");
 				}
-				
 			} catch (Exception e) {
-				
 			}
 		}
+		
 		
 		if(vista.boton_guardar == evento.getSource()) {
 			String nombre,apellido,fecha,direccion;
@@ -103,7 +113,6 @@ public class Controlador implements ActionListener {
 			try {
 				this.modelo.create(nombre, apellido, direccion, dni, fecha);
 			} catch (FileNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.vista.vista_create.setVisible(false);
@@ -128,7 +137,6 @@ public class Controlador implements ActionListener {
 				this.modelo.update("dni", String.valueOf(dni),id);
 				this.modelo.update("fecha",fecha,id);
 			} catch (FileNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -143,7 +151,6 @@ public class Controlador implements ActionListener {
 			try {
 				this.modelo.delete(id,"id");
 			} catch (FileNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.vista.vista_delete.setVisible(false);

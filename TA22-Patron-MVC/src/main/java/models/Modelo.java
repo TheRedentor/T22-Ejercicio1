@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import conexion.Conexion;
 
 public class Modelo {
@@ -57,9 +59,9 @@ public class Modelo {
 	
 	
 	public void create(String nombre, String apellido, String direccion, int dni, String fecha) throws FileNotFoundException, SQLException {
-		conexion.create_connection();
-		conexion.insertData("T22_1","INSERT INTO Clientes (nombre, apellido, direccion, dni, fecha) VALUES('"+nombre+"', '"+apellido+"', '"+direccion+"', '"+dni+"', '"+fecha+"')");
-		conexion.closeConnection();
+			conexion.create_connection();
+			conexion.insertData("T22_1","INSERT INTO Clientes (nombre, apellido, direccion, dni, fecha) VALUES('"+nombre+"', '"+apellido+"', '"+direccion+"', '"+dni+"', '"+fecha+"')");
+			conexion.closeConnection();
 	}
 	
 	public ArrayList<String> read() throws SQLException, FileNotFoundException {
