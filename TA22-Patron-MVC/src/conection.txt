@@ -1,0 +1,3 @@
+jdbc:mysql://192.168.1.139:3306?useTimezone=true&serverTimezone=UTC
+remote
+Remote123!
